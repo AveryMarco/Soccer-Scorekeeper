@@ -1,0 +1,552 @@
+import React, { Component } from 'react';
+import { AppRegistry, Text, View, StyleSheet, Image, TextInput, ImageBackground, TouchableHighlight, Alert, Dimensions } from 'react-native';
+import Constants from 'expo-constants';
+
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
+export default class App extends Component {
+    state = {
+        teamOne: 'Team 1',
+        teamTwo: 'Team 2',
+        teamThree: 'Team 1',
+        teamFour: 'Team 2',
+        goalOne: 0,
+        goalTwo: 0,
+        goalThree: 0,
+        goalFour: 0,
+        gameOnePageDisplay: 'block',
+        gameTwoPageDisplay: 'none',
+        statusOne: 'The Teams are Tied!',
+        statusTwo: 'The Teams are Tied!',
+    };
+    
+    updateStatusOne = () => {
+        if ( this.state.goalOne > this.state.goalTwo) {
+            this.setState({ 
+                statusOne: this.state.teamOne + ' is Winning!'
+            })
+        } else if(this.state.goalTwo > this.state.goalOne) {
+            this.setState({ 
+                statusOne: this.state.teamTwo + ' is Winning!'
+            })
+        } else {
+            this.setState({ 
+                statusOne: 'The Teams are Tied!'
+            })
+        }
+    }
+    
+    handleGameOnePagePress = () => this.setState(state => ({
+        gameOnePageDisplay: 'block',
+        gameTwoPageDisplay: 'none',
+    }));
+    
+    handleGameTwoPagePress = () => this.setState(state => ({
+        gameOnePageDisplay: 'none',
+        gameTwoPageDisplay: 'block',
+    }))
+
+    _changeTeamOne = teamOne => {
+        this.setState({ teamOne });
+    };
+    _changeTeamTwo = teamTwo => {
+        this.setState({ teamTwo });
+    };
+    _changeTeamThree = teamThree => {
+        this.setState({ teamThree });
+    };
+    _changeTeamFour = teamFour => {
+        this.setState({ teamFour });
+    };
+    addGoalOne = () => {
+        if ( this.state.goalOne + 1 > this.state.goalTwo) {
+            this.setState({ 
+                goalOne: this.state.goalOne + 1,
+                statusOne: this.state.teamOne + ' is Winning!',
+            })
+        } else if(this.state.goalOne + 1 < this.state.goalTwo) {
+            this.setState({ 
+                goalOne: this.state.goalOne + 1,
+                statusOne: this.state.teamTwo + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalOne: this.state.goalOne + 1,
+                statusOne: 'The Teams are Tied!',
+            })
+        }
+    };
+    removeGoalOne = () => {
+         if ( this.state.goalOne - 1 > this.state.goalTwo) {
+            this.setState({ 
+                goalOne: this.state.goalOne - 1,
+                statusOne: this.state.teamOne + ' is Winning!',
+            })
+        } else if(this.state.goalOne - 1 < this.state.goalTwo) {
+            this.setState({ 
+                goalOne: this.state.goalOne - 1,
+                statusOne: this.state.teamTwo + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalOne: this.state.goalOne - 1,
+                statusOne: 'The Teams are Tied!',
+            })
+        }
+    };
+    addGoalTwo = () => {
+        if ( this.state.goalTwo + 1 > this.state.goalOne) {
+            this.setState({ 
+                goalTwo: this.state.goalTwo + 1,
+                statusOne: this.state.teamTwo + ' is Winning!',
+            })
+        } else if(this.state.goalTwo + 1 < this.state.goalOne) {
+            this.setState({ 
+                goalTwo: this.state.goalTwo + 1,
+                statusOne: this.state.teamOne + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalTwo: this.state.goalTwo + 1,
+                statusOne: 'The Teams are Tied!',
+            })
+        }
+    };
+    removeGoalTwo = () => {
+        if ( this.state.goalTwo - 1 > this.state.goalOne) {
+            this.setState({ 
+                goalTwo: this.state.goalTwo - 1,
+                statusOne: this.state.teamTwo + ' is Winning!',
+            })
+        } else if(this.state.goalTwo - 1 < this.state.goalOne) {
+            this.setState({ 
+                goalTwo: this.state.goalTwo - 1,
+                statusOne: this.state.teamOne + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalTwo: this.state.goalTwo - 1,
+                statusOne: 'The Teams are Tied!',
+            })
+        }
+    };
+    addGoalThree = () => {
+        if ( this.state.goalThree + 1 > this.state.goalFour) {
+            this.setState({ 
+                goalThree: this.state.goalThree + 1,
+                statusTwo: this.state.teamThree + ' is Winning!',
+            })
+        } else if(this.state.goalThree + 1 < this.state.goalFour) {
+            this.setState({ 
+                goalThree: this.state.goalThree + 1,
+                statusTwo: this.state.teamFour + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalThree: this.state.goalThree + 1,
+                statusTwo: 'The Teams are Tied!',
+            })
+        }
+    };
+    removeGoalThree = () => {
+        if ( this.state.goalThree - 1 > this.state.goalFour) {
+            this.setState({ 
+                goalThree: this.state.goalThree - 1,
+                statusTwo: this.state.teamThree + ' is Winning!',
+            })
+        } else if(this.state.goalThree - 1 < this.state.goalFour) {
+            this.setState({ 
+                goalThree: this.state.goalThree - 1,
+                statusTwo: this.state.teamFour + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalThree: this.state.goalThree - 1,
+                statusTwo: 'The Teams are Tied!',
+            })
+        }
+    };
+    addGoalFour = () => {
+        if ( this.state.goalFour + 1 > this.state.goalThree) {
+            this.setState({ 
+                goalFour: this.state.goalFour + 1,
+                statusTwo: this.state.teamFour + ' is Winning!',
+            })
+        } else if(this.state.goalFour + 1 < this.state.goalThree) {
+            this.setState({ 
+                goalFour: this.state.goalFour + 1,
+                statusTwo: this.state.teamThree + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalFour: this.state.goalFour + 1,
+                statusTwo: 'The Teams are Tied!',
+            })
+        }
+    };
+    removeGoalFour = () => {
+        if ( this.state.goalFour - 1 > this.state.goalThree) {
+            this.setState({ 
+                goalFour: this.state.goalFour - 1,
+                statusTwo: this.state.teamFour + ' is Winning!',
+            })
+        } else if(this.state.goalFour - 1 < this.state.goalThree) {
+            this.setState({ 
+                goalFour: this.state.goalFour - 1,
+                statusTwo: this.state.teamThree + ' is Winning!',
+            })
+        } else {
+            this.setState({ 
+                goalFour: this.state.goalFour - 1,
+                statusTwo: 'The Teams are Tied!',
+            })
+        }
+    };
+    
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={{ display: this.state.gameOnePageDisplay }}>
+                    <View style={styles.contentContainer}>
+                        <ImageBackground
+                            style={styles.background}
+                            source={{ uri: 'data:image/jpeg;base64,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' }}
+                        >
+                            <View style={styles.textContainer}>
+                            <View style={styles.tContainer}>
+                                <Text style={styles.title}>
+                                    SOCCER SCOREKEEPER
+                                </Text>
+                                <Text style={styles.title}>
+                                    {this.state.teamOne} vs. {this.state.teamTwo}
+                                </Text>
+                                <View style={styles.buttonContainer}>
+                                    <View style={styles.button}>
+                                        <TouchableHighlight
+                                            onPress={this.addGoalOne}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                {this.state.teamOne} GOAL!
+                                            </Text>
+                                        
+                                        </TouchableHighlight>
+                                    </View>
+                                    
+                                    <View style={styles.button}>
+                                        <TouchableHighlight
+                                            onPress={this.addGoalTwo}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                {this.state.teamTwo} GOAL!
+                                            </Text>
+                                        
+                                        </TouchableHighlight>
+                                    </View>
+                                </View>
+                                
+                                
+                                <View style={styles.buttonContainer}>
+                                
+                                    <TouchableHighlight
+                                        onPress={this.removeGoalOne}
+                                    >
+                                        <View style={styles.removebutton}>
+                                            <Text style={styles.removebuttonText}>
+                                                {this.state.teamOne} Remove Goal
+                                            </Text>
+                                        </View>
+                                    </TouchableHighlight>
+                                
+                                    
+                                    <TouchableHighlight
+                                        onPress={this.removeGoalTwo}
+                                    >
+                                        <View style={styles.removebutton}>
+                                            <Text style={styles.removebuttonText}>
+                                                {this.state.teamTwo} Remove Goal
+                                            </Text>
+                                        </View>
+                                    </TouchableHighlight>
+                                    
+                                </View>
+                                
+                                
+                                <Text style={styles.paragraph}>
+                                    SCORE
+                                </Text>
+                                <View style={styles.buttonContainer}>
+                                    <TextInput
+                                        value={this.state.teamOne}
+                                        onChangeText={this._changeTeamOne}
+                                        style={styles.textInput}
+                                    />
+                                    <Text style={styles.team}>
+                                         : {this.state.goalOne}
+                                    </Text>
+                                </View>
+                                <View style={styles.buttonContainer}>
+                                    <TextInput
+                                        value={this.state.teamTwo}
+                                        onChangeText={this._changeTeamTwo}
+                                        style={styles.textInput}
+                                    />
+                                    <Text style={styles.team}>
+                                         : {this.state.goalTwo}
+                                    </Text>
+                                </View>
+                                <View style={styles.outcomeBox}>
+                                    <Text style={styles.paragraph}>
+                                        {this.state.statusOne}
+                                    </Text>
+                                </View>
+                            </View>
+                            </View>
+                        </ImageBackground>
+                    </View>
+                </View>
+                
+                <View style={{ display: this.state.gameTwoPageDisplay }}>
+                    <View style={styles.contentContainer}>
+                        <ImageBackground
+                            style={styles.background}
+                            source={{ uri: 'data:image/jpeg;base64,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' }}
+                        >
+                            <View style={styles.textContainer}>
+                            <View style={styles.tContainer}>
+                                <Text style={styles.title}>
+                                    SOCCER SCOREKEEPER
+                                </Text>
+                                <Text style={styles.title}>
+                                    {this.state.teamThree} vs. {this.state.teamFour}
+                                </Text>
+                                <View style={styles.buttonContainer}>
+                                    <View style={styles.button}>
+                                        <TouchableHighlight
+                                            onPress={this.addGoalThree}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                {this.state.teamThree} GOAL!
+                                            </Text>
+                                        
+                                        </TouchableHighlight>
+                                    </View>
+                                    
+                                    <View style={styles.button}>
+                                        <TouchableHighlight
+                                            onPress={this.addGoalFour}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                {this.state.teamFour} GOAL!
+                                            </Text>
+                                        
+                                        </TouchableHighlight>
+                                    </View>
+                                </View>
+                                
+                                
+                                <View style={styles.buttonContainer}>
+                                
+                                    <TouchableHighlight
+                                        onPress={this.removeGoalThree}
+                                    >
+                                        <View style={styles.removebutton}>
+                                            <Text style={styles.removebuttonText}>
+                                                {this.state.teamThree} Remove Goal
+                                            </Text>
+                                        </View>
+                                    </TouchableHighlight>
+                                
+                                    
+                                    <TouchableHighlight
+                                        onPress={this.removeGoalFour}
+                                    >
+                                        <View style={styles.removebutton}>
+                                            <Text style={styles.removebuttonText}>
+                                                {this.state.teamFour} Remove Goal
+                                            </Text>
+                                        </View>
+                                    </TouchableHighlight>
+                                    
+                                </View>
+                                
+                                
+                                <Text style={styles.paragraph}>
+                                    SCORE
+                                </Text>
+                                <View style={styles.buttonContainer}>
+                                    <TextInput
+                                        value={this.state.teamThree}
+                                        onChangeText={this._changeTeamThree}
+                                        style={styles.textInput}
+                                    />
+                                    <Text style={styles.team}>
+                                         : {this.state.goalThree}
+                                    </Text>
+                                </View>
+                                <View style={styles.buttonContainer}>
+                                    <TextInput
+                                        value={this.state.teamFour}
+                                        onChangeText={this._changeTeamFour}
+                                        style={styles.textInput}
+                                    />
+                                    <Text style={styles.team}>
+                                         : {this.state.goalFour}
+                                    </Text>
+                                </View>
+                                <View style={styles.outcomeBox}>
+                                    <Text style={styles.paragraph}>
+                                        {this.state.statusTwo}
+                                    </Text>
+                                </View>
+                            </View>
+                            </View>
+                        </ImageBackground>
+                    </View>
+                </View>
+            
+                <View style={styles.navbarContainer}>
+                    <TouchableHighlight style={styles.navButton}
+                    onPress={this.handleGameOnePagePress}
+                    >
+                        <Text style={styles.navButtonText}>
+                            Game One
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.navButton}
+                    onPress={this.handleGameTwoPagePress}
+                    >
+                        <Text style={styles.navButtonText}>
+                            Game Two
+                        </Text>
+                    </TouchableHighlight>
+                </View>     
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#00e64d',
+    },
+    tContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    title: {
+        color: 'black',
+        fontSize: 25,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginBottom: 35,
+
+    },
+    paragraph: {
+        color: 'black',
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 10,
+        fontWeight: 'bold',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+    },
+    removebutton: {
+        height: 50,
+        width: 100,
+        backgroundColor: 'black',
+        borderColor: 'white',
+        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+        marginBottom: 30,
+    },
+    button: {
+        height: 60,
+        width: 100,
+        backgroundColor: 'black',
+        borderColor: 'white',
+        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center',
+    },
+    removebuttonText: {
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center',
+    },
+    textInput: {
+        height: 30,
+        borderWidth: 2,
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        backgroundColor: 'black',
+        borderColor: 'white',
+    },
+    team: {
+        fontSize: 25,
+        fontWeight: 'bold',
+    },
+    background: {
+        flex: 1,
+        width: 400,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    navbarContainer: {
+        height: deviceHeight/6,
+        width: deviceWidth,
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopWidth: 10,
+        borderColor: 'black',
+    },
+    navButton: {
+        height: deviceHeight/14,
+        width: deviceWidth/4,
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 20,
+    },
+    navButtonText: {
+        fontSize: deviceHeight/40,
+        textAlign: 'center',
+        color: 'black',
+    },
+    contentContainer: {
+        height: 5*(deviceHeight/6),
+        width: deviceWidth,
+        alignItems: 'center',
+
+    },
+    outcomeBox: {
+        width: 225,
+        height: 35,
+        backgroundColor: 'white',
+        marginTop: 20,
+        justifyContent: 'center',
+        textAlign: 'center',
+        borderColor: 'black',
+        borderWidth: 2,
+    },
+});
